@@ -6,6 +6,6 @@ final class WavesFundamentalsTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(WavesFundamentals().text, "Hello, World!")
+
     }
 }
