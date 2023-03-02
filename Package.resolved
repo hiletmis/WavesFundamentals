@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "wavesutil",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hiletmis/WavesUtil.git",
+      "state" : {
+        "revision" : "5289d84be4159bf69f87069ecd19d00537d98028",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
