@@ -274,7 +274,7 @@ public extension TransactionSignatureV2 {
             var signature: [UInt8] = []
             signature += toByteArray(self.typeByte)
             signature += toByteArray(Int8(self.version))
-            signature += WavesUtil.shared.base58decode(input: model.senderPublicKey) ?? []
+            signature += CryptoUtil.shared.base58decode(input: model.senderPublicKey) ?? []
             
             signature += alias.arrayWithSize()
             signature += toByteArray(model.fee)
@@ -289,14 +289,14 @@ public extension TransactionSignatureV2 {
                 recipient += toByteArray(Int8(model.chainId))
                 recipient += model.recipient.arrayWithSize()
             } else {
-                recipient += WavesUtil.shared.base58decode(input: model.recipient) ?? []
+                recipient += CryptoUtil.shared.base58decode(input: model.recipient) ?? []
             }
             
             var signature: [UInt8] = []
             signature += toByteArray(self.typeByte)
             signature += toByteArray(Int8(self.version))
             signature += [0]
-            signature += WavesUtil.shared.base58decode(input: model.senderPublicKey) ?? []
+            signature += CryptoUtil.shared.base58decode(input: model.senderPublicKey) ?? []
             
             signature += recipient
             signature += toByteArray(model.amount)
@@ -306,13 +306,13 @@ public extension TransactionSignatureV2 {
             
         case .burn(let model):
             
-            let assetId: [UInt8] = WavesUtil.shared.base58decode(input: model.assetID) ?? []
+            let assetId: [UInt8] = CryptoUtil.shared.base58decode(input: model.assetID) ?? []
             
             var signature: [UInt8] = []
             signature += toByteArray(self.typeByte)
             signature += toByteArray(Int8(self.version))
             signature += toByteArray(Int8(model.chainId))
-            signature += WavesUtil.shared.base58decode(input: model.senderPublicKey) ?? []
+            signature += CryptoUtil.shared.base58decode(input: model.senderPublicKey) ?? []
             signature += assetId
             signature += toByteArray(model.quantity)
             signature += toByteArray(model.fee)
@@ -321,13 +321,13 @@ public extension TransactionSignatureV2 {
             
         case .cancelLease(let model):
             
-            let leaseId: [UInt8] = WavesUtil.shared.base58decode(input: model.leaseId) ?? []
+            let leaseId: [UInt8] = CryptoUtil.shared.base58decode(input: model.leaseId) ?? []
             
             var signature: [UInt8] = []
             signature += toByteArray(self.typeByte)
             signature += toByteArray(Int8(self.version))
             signature += toByteArray(Int8(model.chainId))
-            signature += WavesUtil.shared.base58decode(input: model.senderPublicKey) ?? []
+            signature += CryptoUtil.shared.base58decode(input: model.senderPublicKey) ?? []
             signature += toByteArray(model.fee)
             signature += toByteArray(model.timestamp)
             signature += leaseId
@@ -341,7 +341,7 @@ public extension TransactionSignatureV2 {
                 recipient += toByteArray(Int8(model.chainId))
                 recipient += model.recipient.arrayWithSize()
             } else {
-                recipient += WavesUtil.shared.base58decode(input: model.recipient) ?? []
+                recipient += CryptoUtil.shared.base58decode(input: model.recipient) ?? []
             }
             
             let assetId = model.assetId.normalizeWavesAssetId
@@ -350,14 +350,14 @@ public extension TransactionSignatureV2 {
             var signature: [UInt8] = []
             signature += toByteArray(self.typeByte)
             signature += toByteArray(Int8(self.version))
-            signature += (WavesUtil.shared.base58decode(input: model.senderPublicKey) ?? [])
-            signature += assetId.isEmpty ? [UInt8(0)] : ([UInt8(1)] + (WavesUtil.shared.base58decode(input: assetId) ?? []))
-            signature += feeAssetID.isEmpty ? [UInt8(0)] : ([UInt8(1)] + (WavesUtil.shared.base58decode(input: feeAssetID) ?? []))
+            signature += (CryptoUtil.shared.base58decode(input: model.senderPublicKey) ?? [])
+            signature += assetId.isEmpty ? [UInt8(0)] : ([UInt8(1)] + (CryptoUtil.shared.base58decode(input: assetId) ?? []))
+            signature += feeAssetID.isEmpty ? [UInt8(0)] : ([UInt8(1)] + (CryptoUtil.shared.base58decode(input: feeAssetID) ?? []))
             signature += toByteArray(model.timestamp)
             signature += toByteArray(model.amount)
             signature += toByteArray(model.fee)
             signature += recipient
-            signature += model.attachment.isEmpty == true ? [UInt8(0), UInt8(0)] : (WavesUtil.shared.base58decode(input: model.attachment)?.arrayWithSize() ?? [])
+            signature += model.attachment.isEmpty == true ? [UInt8(0), UInt8(0)] : (CryptoUtil.shared.base58decode(input: model.attachment)?.arrayWithSize() ?? [])
             
             return signature
             
@@ -367,8 +367,8 @@ public extension TransactionSignatureV2 {
             signature += toByteArray(self.typeByte)
             signature += toByteArray(Int8(self.version))
             signature += toByteArray(Int8(model.chainId))
-            signature += WavesUtil.shared.base58decode(input: model.senderPublicKey) ?? []
-            signature += (WavesUtil.shared.base58decode(input: model.assetId) ?? [])
+            signature += CryptoUtil.shared.base58decode(input: model.senderPublicKey) ?? []
+            signature += (CryptoUtil.shared.base58decode(input: model.assetId) ?? [])
             signature += toByteArray(model.quantity)
             signature += model.isReissuable == true ? [1] : [0]
             signature += toByteArray(model.fee)
@@ -382,7 +382,7 @@ public extension TransactionSignatureV2 {
             signature += toByteArray(self.typeByte)
             signature += toByteArray(Int8(self.version))
             signature += toByteArray(Int8(model.chainId))
-            signature += WavesUtil.shared.base58decode(input: model.senderPublicKey) ?? []
+            signature += CryptoUtil.shared.base58decode(input: model.senderPublicKey) ?? []
             signature += model.name.arrayWithSize()
             signature += model.description.arrayWithSize()
             signature += toByteArray(model.quantity)
@@ -390,7 +390,7 @@ public extension TransactionSignatureV2 {
             signature += model.isReissuable == true ? [1] : [0]
             signature += toByteArray(model.fee)
             signature += toByteArray(model.timestamp)
-            signature += (model.script?.isEmpty ?? true) ? [UInt8(0)] : ([UInt8(1)] + (WavesUtil.shared.base64decode(input: model.script ?? "") ?? []).arrayWithSize())
+            signature += (model.script?.isEmpty ?? true) ? [UInt8(0)] : ([UInt8(1)] + (CryptoUtil.shared.base64decode(input: model.script ?? "") ?? []).arrayWithSize())
             return signature
             
         case .invokeScript2(let model):
@@ -401,7 +401,7 @@ public extension TransactionSignatureV2 {
                 dApp += toByteArray(Int8(model.chainId))
                 dApp += model.dApp.arrayWithSize()
             } else {
-                dApp += WavesUtil.shared.base58decode(input: model.dApp) ?? []
+                dApp += CryptoUtil.shared.base58decode(input: model.dApp) ?? []
             }
             
             let feeAssetId = model.feeAssetId.normalizeWavesAssetId
@@ -410,12 +410,12 @@ public extension TransactionSignatureV2 {
             signature += toByteArray(self.typeByte)
             signature += toByteArray(Int8(self.version))
             signature += toByteArray(Int8(model.chainId))
-            signature += WavesUtil.shared.base58decode(input: model.senderPublicKey) ?? []
+            signature += CryptoUtil.shared.base58decode(input: model.senderPublicKey) ?? []
             signature += dApp
             signature += model.callBytes
             signature += model.paymentBytes
             signature += toByteArray(model.fee)
-            signature += feeAssetId.isEmpty ? [UInt8(0)] : ([UInt8(1)] + (WavesUtil.shared.base58decode(input: feeAssetId) ?? []))
+            signature += feeAssetId.isEmpty ? [UInt8(0)] : ([UInt8(1)] + (CryptoUtil.shared.base58decode(input: feeAssetId) ?? []))
             signature += toByteArray(model.timestamp)
             return signature
         }
@@ -431,7 +431,7 @@ private extension TransactionSignatureV2.Structure.InvokeScript.Call {
             switch arg.value {
             case .binary(let value):
                 
-                bytes += [1] + (WavesUtil.shared.base64decode(input: value) ?? []).arrayWithSize32()
+                bytes += [1] + (CryptoUtil.shared.base64decode(input: value) ?? []).arrayWithSize32()
                 
             case .string(let value):
                 
@@ -477,7 +477,7 @@ private extension TransactionSignatureV2.Structure.InvokeScript {
             
             let assetIdTrue = paymentItem.assetId.normalizeWavesAssetId
             
-            let assetId = assetIdTrue.isEmpty ? [UInt8(0)] : ([UInt8(1)] + (WavesUtil.shared.base58decode(input: assetIdTrue) ?? []))
+            let assetId = assetIdTrue.isEmpty ? [UInt8(0)] : ([UInt8(1)] + (CryptoUtil.shared.base58decode(input: assetIdTrue) ?? []))
             
             bytes += amount
             bytes += assetId

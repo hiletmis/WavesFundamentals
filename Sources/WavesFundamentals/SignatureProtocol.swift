@@ -23,24 +23,24 @@ public protocol SignatureProtocol {
 public extension SignatureProtocol {
     
     func signature(seed: Seed) -> Bytes? {
-        return WavesUtil.shared.signBytes(bytes: bytesStructure, seed: seed)
+        return CryptoUtil.shared.signBytes(bytes: bytesStructure, seed: seed)
     }
     
     func signature(seed: Seed) -> String? {
         guard let bytes: Bytes = signature(seed: seed) else { return nil }
-        return WavesUtil.shared.base58encode(input: bytes)
+        return CryptoUtil.shared.base58encode(input: bytes)
     }
     
     func signature(privateKey: PrivateKey) -> Bytes? {
-        return WavesUtil.shared.signBytes(bytes: bytesStructure, privateKey: privateKey)
+        return CryptoUtil.shared.signBytes(bytes: bytesStructure, privateKey: privateKey)
     }
     
     func signature(privateKey: PrivateKey) -> String? {
         guard let bytes: Bytes = signature(privateKey: privateKey) else { return nil }
-        return WavesUtil.shared.base58encode(input: bytes)
+        return CryptoUtil.shared.base58encode(input: bytes)
     }
     
     var id: String {
-        return WavesUtil.shared.base58encode(input: WavesUtil.shared.blake2b256(input: bytesStructure)) ?? ""
+        return CryptoUtil.shared.base58encode(input: CryptoUtil.shared.blake2b256(input: bytesStructure)) ?? ""
     }
 }

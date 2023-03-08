@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hiletmis/WavesUtil.git",
       "state" : {
-        "revision" : "4920b155b020b484add4570217a628393a9d564b",
-        "version" : "1.0.1"
+        "revision" : "87e9a7a221679f664a3318e0221f9b39028946e2",
+        "version" : "1.0.3"
       }
     }
   ],
