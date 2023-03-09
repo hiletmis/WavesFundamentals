@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "wavesutil",
+      "identity" : "ennoutil",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/hiletmis/WavesUtil.git",
+      "location" : "https://github.com/hiletmis/EnnoUtil",
       "state" : {
-        "revision" : "87e9a7a221679f664a3318e0221f9b39028946e2",
-        "version" : "1.0.3"
+        "revision" : "173c7f2b33def1e94c0ed7092b7cbce90e00024e",
+        "version" : "1.0.4"
       }
     }
   ],

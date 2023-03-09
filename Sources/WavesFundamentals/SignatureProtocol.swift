@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import WavesUtil
+import EnnoUtil
 
 public protocol SignatureProtocol {
     

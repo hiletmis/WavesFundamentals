@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import WavesUtil
+import EnnoUtil
 import Extensions
 
 public extension TransactionSignatureV2 {
